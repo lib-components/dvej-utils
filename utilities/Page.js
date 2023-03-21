@@ -27,7 +27,13 @@ class Page extends LitElement {
   _handleLocationChanged() {
     this.requestUpdate();
   }
-  
+
+  shouldUpdate(changedProps) {
+    const oldPath = changedProps.get('path');
+    const newPath = this.getParams().path;
+    return oldPath !== newPath;
+  }
+
   update() {
     super.update();
     if (this.active) {
