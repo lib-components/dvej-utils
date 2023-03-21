@@ -14,14 +14,20 @@ class Page extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    window.addEventListener('location-changed', this._handleLocationChanged.bind(this));
     this.active = true;
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    window.removeEventListener('location-changed', this._handleLocationChanged.bind(this));
     this.active = false;
   }
 
+  _handleLocationChanged() {
+    this.requestUpdate();
+  }
+  
   update() {
     super.update();
     if (this.active) {
